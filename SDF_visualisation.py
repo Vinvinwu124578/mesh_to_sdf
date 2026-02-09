@@ -25,7 +25,7 @@ def visualize_sdf_npz(npz_path, point_size=2):
 
 
 if __name__ == "__main__":
-    npz_path = r"C:/Users/wudaw/OneDrive - University of Bristol/Desktop/ModelNet40/airplane/sdf_npz_train_same_as_ori_paper/airplane_0080.npz"
+    npz_path = r"C:/Users/wudaw/OneDrive - University of Bristol/Desktop/ModelNet40/guitar/sdf_npz_train_same_as_ori_paper/guitar_0080.npz"
     # npz_path = r"C:/Users/wudaw/OneDrive - University of Bristol/Desktop/ModelNet40/airplane/sdf_npz_train/airplane_0001.npz"
 
     # npz_path = r"C:/Users/wudaw/OneDrive - University of Bristol/Desktop/ModelNet40/chair/sdf_npz_train/chair_0001.npz"

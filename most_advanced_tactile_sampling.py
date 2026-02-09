@@ -499,16 +499,16 @@ def visualize_matplotlib_single(points_all, sampled_points, center_point=None):
 # 6) 主入口：只处理一个 OBJ
 # -----------------------------
 if __name__ == "__main__":
-    OBJ_PATH = r"C:/Users/wudaw/OneDrive - University of Bristol/Desktop/ModelNet40/airplane/train_obj/airplane_0001.obj"
-    OUT_NPZ = r"C:/Users/wudaw/OneDrive - University of Bristol/Desktop/airplane_0001_single_finger.npz"  # 可改为 None 不保存
-
+    OBJ_PATH = r"C:/Users/wudaw/OneDrive - University of Bristol/Desktop/ModelNet40/chair/train_obj/chair_0002.obj"
+    # OUT_NPZ = r"C:/Users/wudaw/OneDrive - University of Bristol/Desktop/airplane_0001_single_finger.npz"  # 可改为 None 不保存
+    OUT_NPZ = None
     seed = 0
 
     mesh = trimesh.load(OBJ_PATH, force="mesh")
     mesh.process(validate=True)
 
     # airplane 建议点云更密一点
-    spc = sample_from_mesh(mesh, sample_point_count=600_000, calculate_normals=True, seed=seed)
+    spc = sample_from_mesh(mesh, sample_point_count=1000_000, calculate_normals=True, seed=seed)
 
     sampled_points, sdf, finger_id, points_all, center_idx = tactile_sample_single_finger(
         spc,
