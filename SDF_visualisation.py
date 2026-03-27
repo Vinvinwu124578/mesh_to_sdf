@@ -25,7 +25,21 @@ def visualize_sdf_npz(npz_path, point_size=2):
 
 
 if __name__ == "__main__":
-    npz_path = r"C:/Users/wudaw/OneDrive - University of Bristol/Desktop/ModelNet40/guitar/sdf_npz_train_same_as_ori_paper/guitar_0080.npz"
+    # npz_path = r"C:/Users/wudaw/OneDrive - University of Bristol/Desktop/ModelNet40/guitar/sdf_npz_train_same_as_ori_paper/guitar_0080.npz"
+    # npz_path = r"C:/Users/wudaw/OneDrive - University of Bristol/Desktop/ModelNet40_train_all_same_as_orin_paper/chair_0001.npz"
+
+    # npz_path = r"C:/Users/wudaw/OneDrive - University of Bristol/Desktop/PhD/Tactile reconstruction/diffusionSDF-replicate-main/chair_0001.npz"
+
+
+    # npz_path = r"C:/Users/wudaw/OneDrive - University of Bristol/Desktop/ModelNet40/door/sdf_npz_train/door_0005.npz"
+
+    # npz_path = r"D:/Users/wudaw/OneDrive - University of Bristol/Desktop/ModelNet40_same_as_orin_paper_small_batch/chair_0005.npz"
+
+
+    npz_path = r"C:/Users/wudaw/OneDrive - University of Bristol/Desktop/ModelNet40/airplane/tactistruct_npz_train/airplane_0001.npz"
+
+
+
     # npz_path = r"C:/Users/wudaw/OneDrive - University of Bristol/Desktop/ModelNet40/airplane/sdf_npz_train/airplane_0001.npz"
 
     # npz_path = r"C:/Users/wudaw/OneDrive - University of Bristol/Desktop/ModelNet40/chair/sdf_npz_train/chair_0001.npz"

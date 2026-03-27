@@ -3,6 +3,15 @@ import os
 import numpy as np
 import trimesh
 
+def scale_to_unit_sphere(mesh):
+    if isinstance(mesh, trimesh.Scene):
+        mesh = mesh.dump().sum()
+
+    vertices = mesh.vertices - mesh.bounding_box.centroid
+    distances = np.linalg.norm(vertices, axis=1)
+    vertices /= np.max(distances)
+
+    return trimesh.Trimesh(vertices=vertices, faces=mesh.faces)
 
 class SurfacePointCloud:
     def __init__(self, mesh, points, normals=None, scans=None):
@@ -145,8 +154,14 @@ def process_single_obj(obj_path, out_path,
     else:
         raise ValueError("seed_mode must be one of: free/object/fixed")
 
+    # mesh = trimesh.load(obj_path, force="mesh")
+    # mesh.process(validate=True)
+
     mesh = trimesh.load(obj_path, force="mesh")
     mesh.process(validate=True)
+
+    # ⭐ 加入归一化
+    mesh = scale_to_unit_sphere(mesh)
 
     spc = sample_from_mesh(mesh, sample_point_count=sample_point_count, calculate_normals=True)
 
@@ -193,7 +208,7 @@ def process_modelnet40(root_dir,
                 print(f"  [SKIP] No {split}_obj")
                 continue
 
-            out_dir = os.path.join(category_dir, f"perfect_tactile_npz_{split}")
+            out_dir = os.path.join(category_dir, f"perfect_tactile_npz_{split}_normalized")
             os.makedirs(out_dir, exist_ok=True)
 
             obj_names = sorted([n for n in os.listdir(obj_dir) if n.lower().endswith(".obj")])
@@ -203,9 +218,9 @@ def process_modelnet40(root_dir,
                 obj_path = os.path.join(obj_dir, name)
                 out_path = os.path.join(out_dir, name[:-4] + ".npz")
 
-                if os.path.exists(out_path):
-                    print(f"    [SKIP] ({i}/{len(obj_names)}) exists: {name}")
-                    continue
+                # if os.path.exists(out_path):
+                #     print(f"    [SKIP] ({i}/{len(obj_names)}) exists: {name}")
+                #     continue
 
                 try:
                     process_single_obj(

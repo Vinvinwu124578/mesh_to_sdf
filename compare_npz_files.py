@@ -59,8 +59,10 @@ import numpy as np
 import os
 
 # ================== 在这里填写两个 npz 文件路径 ==================
-NPZ_FILE_1 = "C:/Users/wudaw/OneDrive - University of Bristol/Desktop/ModelNet40/airplane/sdf_npz_train/airplane_0001.npz"
-NPZ_FILE_2 = "C:/Users/wudaw/OneDrive - University of Bristol/Desktop/airplane/sdf_npz_train/airplane_0001.npz"
+# NPZ_FILE_1 = "C:/Users/wudaw/OneDrive - University of Bristol/Desktop/ModelNet40/airplane/sdf_npz_train/airplane_0001.npz"
+NPZ_FILE_2 = "C:/Users/wudaw/OneDrive - University of Bristol/Desktop/ModelNet40/chair/perfect_tactile_npz_train/chair_0002.npz"
+
+NPZ_FILE_1 = "C:/Users/wudaw/OneDrive - University of Bristol/Desktop/ModelNet40/chair/perfect_tactile_npz_train/chair_0001.npz"
 # ==================================================================
 
 # def print_npz_contents(file_path, name):
@@ -142,8 +144,8 @@ def get_bbox_extent(points):
     extent = max_xyz - min_xyz
     return min_xyz, max_xyz, extent
 
-data1 = np.load(NPZ_FILE_1)
-data2 = np.load(NPZ_FILE_2)
+data1 = np.load(NPZ_FILE_1, allow_pickle=True)
+data2 = np.load(NPZ_FILE_2, allow_pickle=True)
 
 p1 = data1["points"]
 p2 = data2["points"]
