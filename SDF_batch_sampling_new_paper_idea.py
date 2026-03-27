@@ -5875,12 +5875,53 @@ def process_all_categories(
 if __name__ == "__main__":
     root_dir = r"C:/Users/wudaw/OneDrive - University of Bristol/Desktop/ModelNet40"
 
+    selected_categories = [
+        "airplane",
+        "bathtub",
+        "bed",
+        "bench",
+        "bookshelf",
+        "bottle",
+        "bowl",
+        "car",
+        "cone",
+        "cup",
+        "curtain",
+        "desk",
+        "door",
+        "dresser",
+        "flower_pot",
+        "glass_box",
+        "guitar",
+        "keyboard",
+        "lamp",
+        "laptop",
+        "mantel",
+        "monitor",
+        "night_stand",
+        "person",
+        "piano",
+        "plant",
+        "radio",
+        "range_hood",
+        "sink",
+        "stairs",
+        "stool",
+        "table",
+        "tent",
+        "toilet",
+        "tv_stand",
+        "vase",
+        "wardrobe",
+        "xbox",
+    ]
+
     process_all_categories(
         root_dir=root_dir,
         split="train",
         max_objects_per_category=80,
         num_tactile_samples=10,
-        category_names=["sofa"]
+        category_names = selected_categories
     )
 
     print("\nAll done.")
