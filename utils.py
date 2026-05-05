@@ -56,3 +56,7 @@ def sample_uniform_points_in_unit_sphere(amount):
         return result
     else:
         return unit_sphere_points[:amount, :]
+
+
+def sample_uniform_points_in_unit_cube(amount):
+    return np.random.uniform(-1, 1, size=(int(amount), 3)).astype(np.float32)

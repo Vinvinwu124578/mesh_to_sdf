@@ -1,0 +1,56 @@
+[
+  {
+    "object_index": 0,
+    "object_name": "bathtub_watertight_120mm",
+    "source_mesh": "C:\\Users\\wudaw\\OneDrive - University of Bristol\\Desktop\\3D\u6253\u5370\u7269\u4f53\\watertight meshes\\bathtub_watertight_120mm.stl",
+    "staged_obj": "C:\\Users\\wudaw\\Downloads\\mesh_to_sdf-master\\mesh_to_sdf-master\\mesh_to_sdf\\watertight_tactile_pose_work\\shapenet_style_input\\custom_watertight\\bathtub_watertight_120mm\\models\\model_normalized.obj"
+  },
+  {
+    "object_index": 1,
+    "object_name": "bottle_watertight_120mm",
+    "source_mesh": "C:\\Users\\wudaw\\OneDrive - University of Bristol\\Desktop\\3D\u6253\u5370\u7269\u4f53\\watertight meshes\\bottle_watertight_120mm.stl",
+    "staged_obj": "C:\\Users\\wudaw\\Downloads\\mesh_to_sdf-master\\mesh_to_sdf-master\\mesh_to_sdf\\watertight_tactile_pose_work\\shapenet_style_input\\custom_watertight\\bottle_watertight_120mm\\models\\model_normalized.obj"
+  },
+  {
+    "object_index": 2,
+    "object_name": "bowl_watertight_120mm",
+    "source_mesh": "C:\\Users\\wudaw\\OneDrive - University of Bristol\\Desktop\\3D\u6253\u5370\u7269\u4f53\\watertight meshes\\bowl_watertight_120mm.stl",
+    "staged_obj": "C:\\Users\\wudaw\\Downloads\\mesh_to_sdf-master\\mesh_to_sdf-master\\mesh_to_sdf\\watertight_tactile_pose_work\\shapenet_style_input\\custom_watertight\\bowl_watertight_120mm\\models\\model_normalized.obj"
+  },
+  {
+    "object_index": 3,
+    "object_name": "camera_watertight_120mm",
+    "source_mesh": "C:\\Users\\wudaw\\OneDrive - University of Bristol\\Desktop\\3D\u6253\u5370\u7269\u4f53\\watertight meshes\\camera_watertight_120mm.stl",
+    "staged_obj": "C:\\Users\\wudaw\\Downloads\\mesh_to_sdf-master\\mesh_to_sdf-master\\mesh_to_sdf\\watertight_tactile_pose_work\\shapenet_style_input\\custom_watertight\\camera_watertight_120mm\\models\\model_normalized.obj"
+  },
+  {
+    "object_index": 4,
+    "object_name": "chair_watertight_120mm",
+    "source_mesh": "C:\\Users\\wudaw\\OneDrive - University of Bristol\\Desktop\\3D\u6253\u5370\u7269\u4f53\\watertight meshes\\chair_watertight_120mm.stl",
+    "staged_obj": "C:\\Users\\wudaw\\Downloads\\mesh_to_sdf-master\\mesh_to_sdf-master\\mesh_to_sdf\\watertight_tactile_pose_work\\shapenet_style_input\\custom_watertight\\chair_watertight_120mm\\models\\model_normalized.obj"
+  },
+  {
+    "object_index": 5,
+    "object_name": "guitar_watertight_120mm",
+    "source_mesh": "C:\\Users\\wudaw\\OneDrive - University of Bristol\\Desktop\\3D\u6253\u5370\u7269\u4f53\\watertight meshes\\guitar_watertight_120mm.stl",
+    "staged_obj": "C:\\Users\\wudaw\\Downloads\\mesh_to_sdf-master\\mesh_to_sdf-master\\mesh_to_sdf\\watertight_tactile_pose_work\\shapenet_style_input\\custom_watertight\\guitar_watertight_120mm\\models\\model_normalized.obj"
+  },
+  {
+    "object_index": 6,
+    "object_name": "jar_watertight_120mm",
+    "source_mesh": "C:\\Users\\wudaw\\OneDrive - University of Bristol\\Desktop\\3D\u6253\u5370\u7269\u4f53\\watertight meshes\\jar_watertight_120mm.stl",
+    "staged_obj": "C:\\Users\\wudaw\\Downloads\\mesh_to_sdf-master\\mesh_to_sdf-master\\mesh_to_sdf\\watertight_tactile_pose_work\\shapenet_style_input\\custom_watertight\\jar_watertight_120mm\\models\\model_normalized.obj"
+  },
+  {
+    "object_index": 7,
+    "object_name": "motorcycle_watertight_120mm",
+    "source_mesh": "C:\\Users\\wudaw\\OneDrive - University of Bristol\\Desktop\\3D\u6253\u5370\u7269\u4f53\\watertight meshes\\motorcycle_watertight_120mm.stl",
+    "staged_obj": "C:\\Users\\wudaw\\Downloads\\mesh_to_sdf-master\\mesh_to_sdf-master\\mesh_to_sdf\\watertight_tactile_pose_work\\shapenet_style_input\\custom_watertight\\motorcycle_watertight_120mm\\models\\model_normalized.obj"
+  },
+  {
+    "object_index": 8,
+    "object_name": "mug_watertight_120mm",
+    "source_mesh": "C:\\Users\\wudaw\\OneDrive - University of Bristol\\Desktop\\3D\u6253\u5370\u7269\u4f53\\watertight meshes\\mug_watertight_120mm.stl",
+    "staged_obj": "C:\\Users\\wudaw\\Downloads\\mesh_to_sdf-master\\mesh_to_sdf-master\\mesh_to_sdf\\watertight_tactile_pose_work\\shapenet_style_input\\custom_watertight\\mug_watertight_120mm\\models\\model_normalized.obj"
+  }
+]

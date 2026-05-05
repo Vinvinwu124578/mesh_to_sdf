@@ -1,0 +1,13 @@
+{
+  "input_dir": "C:\\Users\\wudaw\\OneDrive - University of Bristol\\Desktop\\3D\u6253\u5370\u7269\u4f53\\watertight meshes",
+  "work_dir": "C:\\Users\\wudaw\\Downloads\\mesh_to_sdf-master\\mesh_to_sdf-master\\mesh_to_sdf\\tmp_tactile_pose_smoke_work",
+  "stage_root": "C:\\Users\\wudaw\\Downloads\\mesh_to_sdf-master\\mesh_to_sdf-master\\mesh_to_sdf\\tmp_tactile_pose_smoke_work\\shapenet_style_input",
+  "base_npz_dir": "C:\\Users\\wudaw\\Downloads\\mesh_to_sdf-master\\mesh_to_sdf-master\\mesh_to_sdf\\tmp_tactile_pose_smoke_work\\shapenet_style_input\\tactistruct_npz_3dprint_manifoldplus_base",
+  "output_dir": "C:\\Users\\wudaw\\Downloads\\mesh_to_sdf-master\\mesh_to_sdf-master\\mesh_to_sdf\\tmp_tactile_pose_smoke_output",
+  "num_objects": 1,
+  "poses_per_object": 2,
+  "base_npz_count": 1,
+  "pose_npz_count": 2,
+  "full_rotation": true,
+  "include_identity": true
+}

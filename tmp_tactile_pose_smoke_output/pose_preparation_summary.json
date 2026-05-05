@@ -1,0 +1,10 @@
+{
+  "input_dir": "C:\\Users\\wudaw\\Downloads\\mesh_to_sdf-master\\mesh_to_sdf-master\\mesh_to_sdf\\tmp_tactile_pose_smoke_work\\shapenet_style_input\\tactistruct_npz_3dprint_manifoldplus_base",
+  "output_dir": "C:\\Users\\wudaw\\Downloads\\mesh_to_sdf-master\\mesh_to_sdf-master\\mesh_to_sdf\\tmp_tactile_pose_smoke_output",
+  "num_source_files": 1,
+  "poses_per_object": 2,
+  "converted_files": 2,
+  "full_rotation": true,
+  "max_degrees": 180.0,
+  "include_identity": true
+}

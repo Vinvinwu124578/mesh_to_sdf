@@ -1,0 +1,7 @@
+{
+  "train": [
+    "sample.npz"
+  ],
+  "val": [],
+  "test": []
+}

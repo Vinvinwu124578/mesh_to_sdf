@@ -1,0 +1,20 @@
+{
+  "history": [
+    {
+      "epoch": 1,
+      "split": "train",
+      "shape_sdf": 0.350864514708519,
+      "progressive_sdf": 0.04199085757136345,
+      "active_focus": 0.33660559356212616,
+      "surface_zero": 0.3171825408935547,
+      "eikonal": 28.585709512233734,
+      "patch_reconstruction": 0.0034821921726688743,
+      "attention_entropy": -3.17669677734375,
+      "attention_diversity": 0.7451896369457245,
+      "path_smoothness": 0.0016252761706709862,
+      "total": 2.297237515449524,
+      "touch_band": 0.3087352439761162,
+      "mean_touch_confidence": 0.5231425762176514
+    }
+  ]
+}

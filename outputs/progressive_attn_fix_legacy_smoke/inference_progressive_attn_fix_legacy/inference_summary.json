@@ -1,0 +1,12 @@
+{
+  "checkpoint": "C:\\Users\\wudaw\\Downloads\\mesh_to_sdf-master\\mesh_to_sdf-master\\mesh_to_sdf\\outputs\\progressive_attn_fix_legacy_smoke\\latest.pt",
+  "num_objects": 1,
+  "num_meshes": 0,
+  "failures": [
+    {
+      "object_path": "C:\\Users\\wudaw\\Downloads\\mesh_to_sdf-master\\mesh_to_sdf-master\\mesh_to_sdf\\tmp_progressive_legacy_smoke\\02942699__02942699__1298634053ad50d36d07c55cf995503e__models__model_normalized.npz",
+      "error": "Predicted SDF does not cross zero on the query grid, so marching cubes cannot recover a valid surface. Observed range: [0.089688, 0.135522]"
+    }
+  ],
+  "rows": []
+}

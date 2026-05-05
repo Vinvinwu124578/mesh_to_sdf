@@ -4878,7 +4878,7 @@ import trimesh
 import open3d as o3d
 
 from scipy.spatial import cKDTree
-from mesh_to_sdf import sample_sdf_near_surface
+from utils import sample_uniform_points_in_unit_cube, sample_uniform_points_in_unit_sphere
 
 
 # =========================================================
@@ -4964,6 +4964,94 @@ def build_raycast_scene(mesh):
     scene = o3d.t.geometry.RaycastingScene()
     scene.add_triangles(mesh_o3d)
     return scene
+
+
+def sample_query_points_near_surface(
+    surface_points,
+    number_of_points=250000,
+    near_std_primary=0.0025,
+    near_std_secondary=0.00025,
+    uniform_region="sphere",
+):
+    surface_sample_count = int(number_of_points * 47 / 50) // 2
+
+    if surface_sample_count > 0:
+        base_ids = np.random.choice(
+            len(surface_points),
+            size=surface_sample_count,
+            replace=len(surface_points) < surface_sample_count,
+        )
+        base_surface_points = surface_points[base_ids]
+    else:
+        base_surface_points = np.zeros((0, 3), dtype=np.float32)
+
+    query_points = [
+        base_surface_points + np.random.normal(
+            scale=near_std_primary,
+            size=(surface_sample_count, 3),
+        ),
+        base_surface_points + np.random.normal(
+            scale=near_std_secondary,
+            size=(surface_sample_count, 3),
+        ),
+    ]
+
+    uniform_sample_count = number_of_points - surface_sample_count * 2
+    resolved_uniform_region = str(uniform_region).strip().lower()
+    if resolved_uniform_region == "sphere":
+        query_points.append(sample_uniform_points_in_unit_sphere(uniform_sample_count))
+    elif resolved_uniform_region == "cube":
+        query_points.append(sample_uniform_points_in_unit_cube(uniform_sample_count))
+    else:
+        raise ValueError(
+            f"Unsupported uniform_region={uniform_region!r}. Expected 'sphere' or 'cube'."
+        )
+
+    return np.concatenate(query_points, axis=0).astype(np.float32)
+
+
+def compute_query_sdf_with_raycasting(
+    scene,
+    query_points,
+    mesh_is_watertight,
+    surface_points=None,
+    surface_normals=None,
+    occupancy_nsamples=11,
+    near_surface_sign_band=0.01,
+):
+    query_tensor = o3d.core.Tensor(
+        np.asarray(query_points, dtype=np.float32),
+        dtype=o3d.core.Dtype.Float32,
+    )
+
+    unsigned_distance = scene.compute_distance(query_tensor).numpy().astype(np.float32)
+    query_sdf = unsigned_distance.copy()
+
+    if mesh_is_watertight:
+        occupancy = scene.compute_occupancy(
+            query_tensor,
+            nsamples=occupancy_nsamples,
+        ).numpy()
+        inside_mask = occupancy > 0.5
+        query_sdf[inside_mask] *= -1.0
+        return query_sdf
+
+    if surface_points is None or surface_normals is None:
+        return query_sdf
+
+    nearest_tree = cKDTree(surface_points)
+    _, nearest_ids = nearest_tree.query(query_points, k=1)
+
+    direction_from_surface = query_points - surface_points[nearest_ids]
+    local_inside_mask = np.einsum(
+        "ij,ij->i",
+        direction_from_surface,
+        surface_normals[nearest_ids],
+    ) < 0
+    near_surface_mask = unsigned_distance <= near_surface_sign_band
+
+    query_sdf[near_surface_mask & local_inside_mask] *= -1.0
+    return query_sdf
 
 
 # =========================================================
@@ -5707,13 +5795,27 @@ def process_single_obj_to_merged_npz(
         num_surface_points=num_surface_points
     )
 
-    print("[INFO] sampling query points using sample_sdf_near_surface ...")
-    query_points, query_sdf = sample_sdf_near_surface(
-        mesh,
-        number_of_points=num_query_points
+    scene = build_raycast_scene(mesh)
+
+    print("[INFO] sampling query points near the surface ...")
+    query_points = sample_query_points_near_surface(
+        surface_points=surface_points,
+        number_of_points=num_query_points,
     )
-    query_points = query_points.astype(np.float32)
-    query_sdf = query_sdf.astype(np.float32)
+
+    if mesh.is_watertight:
+        print("[INFO] computing query_sdf using RaycastingScene occupancy sign (watertight mesh) ...")
+    else:
+        print("[INFO] computing query_sdf using unsigned distance + near-surface sign fallback (non-watertight mesh) ...")
+    query_sdf = compute_query_sdf_with_raycasting(
+        scene=scene,
+        query_points=query_points,
+        mesh_is_watertight=mesh.is_watertight,
+        surface_points=surface_points,
+        surface_normals=surface_normals,
+        occupancy_nsamples=11,
+        near_surface_sign_band=0.01,
+    )
 
     touch_points_all = []
     touch_round_ids_all = []
@@ -5833,6 +5935,41 @@ def process_split(
 # =========================================================
 # 18. process all categories
 # =========================================================
+# def process_all_categories(
+#     root_dir,
+#     split="train",
+#     max_objects_per_category=80,
+#     num_tactile_samples=10,
+#     category_names=None,
+# ):
+#     subdirs = sorted([
+#         os.path.join(root_dir, d)
+#         for d in os.listdir(root_dir)
+#         if os.path.isdir(os.path.join(root_dir, d))
+#     ])
+
+#     if category_names is not None:
+#         category_names = set(category_names)
+#         subdirs = [d for d in subdirs if os.path.basename(d) in category_names]
+
+#     if not subdirs:
+#         print("[WARN] no category folders found under:", root_dir)
+#         return
+
+#     print(f"[INFO] found {len(subdirs)} category folders under root.")
+
+#     for category_dir in subdirs:
+#         category_name = os.path.basename(category_dir)
+#         print(f"\n########## Processing category: {category_name} ##########")
+
+#         process_split(
+#             category_dir=category_dir,
+#             split=split,
+#             max_objects=max_objects_per_category,
+#             num_tactile_samples=num_tactile_samples,
+#             output_folder_name=f"tactistruct_npz_{split}",
+#         )
+
 def process_all_categories(
     root_dir,
     split="train",
@@ -5840,15 +5977,20 @@ def process_all_categories(
     num_tactile_samples=10,
     category_names=None,
 ):
-    subdirs = sorted([
-        os.path.join(root_dir, d)
-        for d in os.listdir(root_dir)
-        if os.path.isdir(os.path.join(root_dir, d))
-    ])
-
     if category_names is not None:
-        category_names = set(category_names)
-        subdirs = [d for d in subdirs if os.path.basename(d) in category_names]
+        subdirs = []
+        for name in category_names:
+            category_dir = os.path.join(root_dir, name)
+            if os.path.isdir(category_dir):
+                subdirs.append(category_dir)
+            else:
+                print(f"[WARN] category folder not found: {category_dir}")
+    else:
+        subdirs = [
+            os.path.join(root_dir, d)
+            for d in os.listdir(root_dir)
+            if os.path.isdir(os.path.join(root_dir, d))
+        ]
 
     if not subdirs:
         print("[WARN] no category folders found under:", root_dir)
@@ -5873,53 +6015,61 @@ def process_all_categories(
 # 19. main
 # =========================================================
 if __name__ == "__main__":
-    root_dir = r"C:/Users/wudaw/OneDrive - University of Bristol/Desktop/ModelNet40"
+    root_dir = r"C:/Users/wudaw/Downloads/ShapeNetCore/ShapeNetCore"
 
     selected_categories = [
-        "airplane",
-        "bathtub",
-        "bed",
-        "bench",
-        "bookshelf",
+        # "xbox",
+        # "wardrobe",
+        # "vase",
+        # "tv_stand",
+        # "toilet",
+        # "tent",
+        # "table",
+        # "stool",
+        # "stairs",
+        # "sink",
+        # "range_hood",
+        # "radio",
+        # "plant",
+        # "piano",
+        # "person",
+        # "night_stand",
+        # "monitor",
+        # "mantel",
+        # "laptop",
+        # "lamp",
+        # "keyboard",
+        # "guitar",
+        # "glass_box",
+        # "flower_pot",
+        # "dresser",
+        # "door",
+        # "desk",
+        # "curtain",
+        # "cup",
+        # "cone",
+        # "chair",
+        # "car",
+        # "bowl",
+        # "bottle",
+        # "bookshelf",
+        # "bench",
+        # "bed",
+        # "bathtub",
+        # "airplane",
+        "camera",
         "bottle",
         "bowl",
-        "car",
-        "cone",
-        "cup",
-        "curtain",
-        "desk",
-        "door",
-        "dresser",
-        "flower_pot",
-        "glass_box",
+        "mug",
         "guitar",
-        "keyboard",
-        "lamp",
-        "laptop",
-        "mantel",
-        "monitor",
-        "night_stand",
-        "person",
-        "piano",
-        "plant",
-        "radio",
-        "range_hood",
-        "sink",
-        "stairs",
-        "stool",
-        "table",
-        "tent",
-        "toilet",
-        "tv_stand",
-        "vase",
-        "wardrobe",
-        "xbox",
+        "camera",
+        "jar",
     ]
 
     process_all_categories(
         root_dir=root_dir,
         split="train",
-        max_objects_per_category=80,
+        max_objects_per_category=275,
         num_tactile_samples=10,
         category_names = selected_categories
     )

@@ -1,0 +1,8 @@
+[
+  {
+    "object_index": 0,
+    "object_name": "bathtub_watertight_120mm",
+    "source_mesh": "C:\\Users\\wudaw\\OneDrive - University of Bristol\\Desktop\\3D\u6253\u5370\u7269\u4f53\\watertight meshes\\bathtub_watertight_120mm.stl",
+    "staged_obj": "C:\\Users\\wudaw\\Downloads\\mesh_to_sdf-master\\mesh_to_sdf-master\\mesh_to_sdf\\tmp_tactile_pose_smoke_work\\shapenet_style_input\\custom_watertight\\bathtub_watertight_120mm\\models\\model_normalized.obj"
+  }
+]

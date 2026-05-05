@@ -1,0 +1,112 @@
+{
+  "seed": 42,
+  "dataset": {
+    "train": {
+      "name": "structured_legacy_progressive",
+      "root": "C:\\Users\\wudaw\\Downloads\\mesh_to_sdf-master\\mesh_to_sdf-master\\mesh_to_sdf\\tmp_progressive_legacy_smoke",
+      "split": ".",
+      "object_filenames": [
+        "02942699__02942699__1298634053ad50d36d07c55cf995503e__models__model_normalized.npz"
+      ],
+      "recursive": true,
+      "touch_view_indices": null,
+      "num_surface_points": 4096,
+      "num_touch_points": 512,
+      "num_query_points": 6144,
+      "dynamic_sampling": true,
+      "near_surface_ratio": 0.6,
+      "near_surface_threshold": 0.015,
+      "negative_sample_ratio": 0.6,
+      "seed": 42,
+      "cache_in_memory": false,
+      "min_touch_points": 128,
+      "merge_touch_views_prob": 0.5,
+      "max_merged_views": 4
+    }
+  },
+  "model": {
+    "use_touch_conditioning": true,
+    "encoder": {
+      "input_dim": 3,
+      "hidden_dim": 256,
+      "token_dim": 256,
+      "num_patches": 24,
+      "points_per_patch": 48,
+      "position_bands": 8,
+      "global_attention_heads": 4,
+      "noise_std": 0.01,
+      "rotation_degrees": 10.0
+    },
+    "latent_path": {
+      "latent_dim": 256,
+      "hidden_dim": 512,
+      "num_stages": 6,
+      "max_noise_std": 0.4,
+      "min_noise_std": 0.05
+    },
+    "decoder": {
+      "hidden_dim": 512,
+      "num_heads": 8,
+      "position_bands": 8,
+      "touch_position_bands": 6,
+      "touch_topk": 16,
+      "touch_sigma": 0.08
+    },
+    "active_sampling": {
+      "enabled": true,
+      "topk_points": 2048
+    },
+    "surface_query_samples": 2048,
+    "apply_touch_augmentation": false
+  },
+  "loss": {
+    "sdf": 1.0,
+    "progressive_sdf": 0.75,
+    "stage_weights": [
+      0.15,
+      0.3,
+      0.5,
+      0.7,
+      0.85,
+      1.0
+    ],
+    "active_focus": 0.5,
+    "touch_zero": 0.75,
+    "surface": 0.25,
+    "eikonal": 0.05,
+    "patch": 0.25,
+    "attention_entropy": 0.01,
+    "attention_diversity": 0.05,
+    "path_smoothness": 0.05
+  },
+  "train": {
+    "epochs": 1,
+    "batch_size": 1,
+    "num_workers": 0,
+    "prefetch_factor": 2,
+    "val_every": 1,
+    "amp": {
+      "enabled": false
+    },
+    "progress": {
+      "enabled": false
+    },
+    "lr": 0.0005,
+    "weight_decay": 1e-06,
+    "grad_clip": 1.0,
+    "device": "cpu",
+    "output_dir": "C:\\Users\\wudaw\\Downloads\\mesh_to_sdf-master\\mesh_to_sdf-master\\mesh_to_sdf\\outputs\\progressive_attn_fix_legacy_smoke"
+  },
+  "wandb": {
+    "enabled": false,
+    "project": "progressive-attn-fix-legacy-from-structured",
+    "name": "progressive_attn_fix_legacy_smoke",
+    "mode": "online",
+    "tags": [
+      "progressive-attn-fix",
+      "legacy-architecture",
+      "structured-mujoco",
+      "no-pose"
+    ]
+  }
+}

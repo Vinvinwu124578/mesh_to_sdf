@@ -1,0 +1,22 @@
+{
+  "ok": 9,
+  "skipped": 0,
+  "failed": 0,
+  "mean_coverage": 0.9608940680821737,
+  "mean_reachable_surface_fraction": 0.6101111107402377,
+  "query_proxy_watertight": 9,
+  "query_proxy_non_watertight": 0,
+  "mean_query_inside_ratio": 0.4553311111111111,
+  "outputs": [
+    "C:\\Users\\wudaw\\Downloads\\mesh_to_sdf-master\\mesh_to_sdf-master\\mesh_to_sdf\\watertight_tactile_pose_work\\shapenet_style_input\\tactistruct_npz_3dprint_manifoldplus_base\\custom_watertight__motorcycle_watertight_120mm__models__model_normalized.npz",
+    "C:\\Users\\wudaw\\Downloads\\mesh_to_sdf-master\\mesh_to_sdf-master\\mesh_to_sdf\\watertight_tactile_pose_work\\shapenet_style_input\\tactistruct_npz_3dprint_manifoldplus_base\\custom_watertight__mug_watertight_120mm__models__model_normalized.npz",
+    "C:\\Users\\wudaw\\Downloads\\mesh_to_sdf-master\\mesh_to_sdf-master\\mesh_to_sdf\\watertight_tactile_pose_work\\shapenet_style_input\\tactistruct_npz_3dprint_manifoldplus_base\\custom_watertight__chair_watertight_120mm__models__model_normalized.npz",
+    "C:\\Users\\wudaw\\Downloads\\mesh_to_sdf-master\\mesh_to_sdf-master\\mesh_to_sdf\\watertight_tactile_pose_work\\shapenet_style_input\\tactistruct_npz_3dprint_manifoldplus_base\\custom_watertight__camera_watertight_120mm__models__model_normalized.npz",
+    "C:\\Users\\wudaw\\Downloads\\mesh_to_sdf-master\\mesh_to_sdf-master\\mesh_to_sdf\\watertight_tactile_pose_work\\shapenet_style_input\\tactistruct_npz_3dprint_manifoldplus_base\\custom_watertight__jar_watertight_120mm__models__model_normalized.npz",
+    "C:\\Users\\wudaw\\Downloads\\mesh_to_sdf-master\\mesh_to_sdf-master\\mesh_to_sdf\\watertight_tactile_pose_work\\shapenet_style_input\\tactistruct_npz_3dprint_manifoldplus_base\\custom_watertight__bowl_watertight_120mm__models__model_normalized.npz",
+    "C:\\Users\\wudaw\\Downloads\\mesh_to_sdf-master\\mesh_to_sdf-master\\mesh_to_sdf\\watertight_tactile_pose_work\\shapenet_style_input\\tactistruct_npz_3dprint_manifoldplus_base\\custom_watertight__bathtub_watertight_120mm__models__model_normalized.npz",
+    "C:\\Users\\wudaw\\Downloads\\mesh_to_sdf-master\\mesh_to_sdf-master\\mesh_to_sdf\\watertight_tactile_pose_work\\shapenet_style_input\\tactistruct_npz_3dprint_manifoldplus_base\\custom_watertight__bottle_watertight_120mm__models__model_normalized.npz",
+    "C:\\Users\\wudaw\\Downloads\\mesh_to_sdf-master\\mesh_to_sdf-master\\mesh_to_sdf\\watertight_tactile_pose_work\\shapenet_style_input\\tactistruct_npz_3dprint_manifoldplus_base\\custom_watertight__guitar_watertight_120mm__models__model_normalized.npz"
+  ],
+  "failures": []
+}
